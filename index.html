@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/CadastreElHouz_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[30.77220669851956,-9.090871842478355],[32.3029212996854,-6.18660741545945]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        function pop_CadastreElHouz_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Mappe'] !== null ? autolinker.link(feature.properties['Mappe'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nature</th>\
+                        <td>' + (feature.properties['Nature'] !== null ? autolinker.link(feature.properties['Nature'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Num</th>\
+                        <td>' + (feature.properties['Num'] !== null ? autolinker.link(feature.properties['Num'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">indice</th>\
+                        <td>' + (feature.properties['indice'] !== null ? autolinker.link(feature.properties['indice'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['complement'] !== null ? autolinker.link(feature.properties['complement'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type</th>\
+                        <td>' + (feature.properties['Type'] !== null ? autolinker.link(feature.properties['Type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nb_Bornes'] !== null ? autolinker.link(feature.properties['Nb_Bornes'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Surf_Calc</th>\
+                        <td>' + (feature.properties['Surf_Calc'] !== null ? autolinker.link(feature.properties['Surf_Calc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Surf_Adop</th>\
+                        <td>' + (feature.properties['Surf_Adop'] !== null ? autolinker.link(feature.properties['Surf_Adop'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Consistanc'] !== null ? autolinker.link(feature.properties['Consistanc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Titre_Min1'] !== null ? autolinker.link(feature.properties['Titre_Min1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Titre_Max1'] !== null ? autolinker.link(feature.properties['Titre_Max1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Titre_Min2'] !== null ? autolinker.link(feature.properties['Titre_Min2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Titre_Max2'] !== null ? autolinker.link(feature.properties['Titre_Max2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Carnet'] !== null ? autolinker.link(feature.properties['Carnet'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Bon'] !== null ? autolinker.link(feature.properties['Bon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DateCB'] !== null ? autolinker.link(feature.properties['DateCB'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Reperage'] !== null ? autolinker.link(feature.properties['Reperage'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Archive'] !== null ? autolinker.link(feature.properties['Archive'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['X'] !== null ? autolinker.link(feature.properties['X'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Y'] !== null ? autolinker.link(feature.properties['Y'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_AFFAIR'] !== null ? autolinker.link(feature.properties['NOM_AFFAIR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Titref'] !== null ? autolinker.link(feature.properties['Titref'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['graphic_de'] !== null ? autolinker.link(feature.properties['graphic_de'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tit'] !== null ? autolinker.link(feature.properties['tit'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TA'] !== null ? autolinker.link(feature.properties['TA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIT2'] !== null ? autolinker.link(feature.properties['TIT2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ST</th>\
+                        <td>' + (feature.properties['ST'] !== null ? autolinker.link(feature.properties['ST'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CadastreElHouz_1_0() {
+            return {
+                pane: 'pane_CadastreElHouz_1',
+                opacity: 1,
+                color: 'rgba(190,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CadastreElHouz_1');
+        map.getPane('pane_CadastreElHouz_1').style.zIndex = 401;
+        map.getPane('pane_CadastreElHouz_1').style['mix-blend-mode'] = 'normal';
+        var layer_CadastreElHouz_1 = new L.geoJson(json_CadastreElHouz_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CadastreElHouz_1',
+            layerName: 'layer_CadastreElHouz_1',
+            pane: 'pane_CadastreElHouz_1',
+            onEachFeature: pop_CadastreElHouz_1,
+            style: style_CadastreElHouz_1_0,
+        });
+        bounds_group.addLayer(layer_CadastreElHouz_1);
+        map.addLayer(layer_CadastreElHouz_1);
+        setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_CadastreElHouz_1,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'Num'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        </script>
+    </body>
+</html>
